@@ -25,12 +25,12 @@ Laravel 5.3 pre-setup with angular 2.1 (and bootstrap 4.0.0-alpha.5)
 
 2.) Delete .git
 
-On UNIX OS
+On UNIX
 ```
 > cd laravel_ng2-cli && rm -rf .git
 ```
 
-On Window
+On Windows
 ```
 > cd laravel_ng2-cli && rmdir /s /q ".git"
 ```
