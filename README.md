@@ -15,6 +15,13 @@ Laravel 5.3 pre-setup with angular 2.1 (and bootstrap 4.0.0-alpha.5)
 - moment
 - toastr
 
+## Prerequisite
+
+- installed composer - https://getcomposer.org/download/
+- Laravel Prerequisite - https://laravel.com/docs/5.3/installation
+- installed angular-cli - https://github.com/angular/angular-cli
+- installed gulp - https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md
+
 ## Instruction
 
 1.) Clone a repository
@@ -41,4 +48,20 @@ On Windows
 > git init
 > git add .
 > git commit -m "Initial commit"
+```
+
+## Commands
+
+Start a develop server
+```
+> npm start
+
+Server start at http://localhost:3000
+```
+
+Build for production
+```
+> npm run build
+
+angular-cli & gulp will do a work for you, just wait :D
 ```
