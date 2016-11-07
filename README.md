@@ -27,7 +27,7 @@ Laravel 5.3 pre-setup with angular 2.1 (and bootstrap 4.0.0-alpha.5)
 1.) Clone a repository
 
 ```
-> git git@github.com:chaniwat/laravel_ng2-cli.git
+> git clone git@github.com:chaniwat/laravel_ng2-cli.git
 ```
 
 2.) Delete .git
