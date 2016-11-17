@@ -68,19 +68,11 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapApiRoutes()
     {
-        $prepare = [
+        Route::group([
             'middleware' => 'api',
             'namespace' => $this->namespace,
-        ];
-
-        // Check API Mode (subdomain or path)
-        if(env('API_MODE', 'path') == 'path') {
-            array_push($prepare, ['prefix' => 'api']);
-        } else if(env('API_MODE', 'subdomain') == 'subdomain') {
-            array_push($prepare, ['domain' => env('APP_PROTOCOL', 'http').'://api.'.env('APP_DOMAIN', 'localhost')]);
-        }
-
-        Route::group($prepare, function ($router) {
+            'prefix' => 'api'
+        ], function ($router) {
             require base_path('routes/api.php');
         });
     }

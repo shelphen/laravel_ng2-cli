@@ -21,6 +21,8 @@ class Handler extends ExceptionHandler
         \Illuminate\Database\Eloquent\ModelNotFoundException::class,
         \Illuminate\Session\TokenMismatchException::class,
         \Illuminate\Validation\ValidationException::class,
+        \Tymon\JWTAuth\Exceptions\TokenExpiredException::class,
+        \Tymon\JWTAuth\Exceptions\TokenInvalidException::class,
     ];
 
     /**
@@ -46,18 +48,8 @@ class Handler extends ExceptionHandler
     public function render($request, Exception $exception)
     {
         if($request->wantsJson()) {
-            if(env('API_MODE', 'path') == 'path') {
-                if($request->is('api/*') || $request->is('api')) {
-                    return $this->handleApi($request, $exception);
-                }
-            } else if(env('API_MODE', 'subdomain') == 'subdomain') {
-                if($request->getHost() == 'api.'.env("APP_DOMAIN")) {
-                    return $this->handleApi($request, $exception);
-                }
-            } else {
-                throw new Exception('invalid API_MODE setting in environment file.');
-            }
-         }
+            return $this->handleApi($request, $exception);
+        }
 
         return $this->handleWeb($request, $exception);
     }
@@ -95,7 +87,11 @@ class Handler extends ExceptionHandler
             return response()->json(['token_absent'], $exception->getStatusCode());
         }
 
-        return response()->json(['invalid_request'], $exception->getStatusCode());
+        if(env('APP_DEBUG')) {
+            return parent::render($request, $exception);
+        } else {
+            return response()->json(['invalid_request'], 400);
+        }
     }
 
     /**
