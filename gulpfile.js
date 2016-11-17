@@ -1,8 +1,4 @@
-'use strict';
-
 const gulp = require('gulp');
-const elixir = require('laravel-elixir');
-
 const fs = require('fs');
 const copydir = require('copy-dir');
 const del = require('del');
