@@ -1,3 +1,5 @@
+'use strict';
+
 const gulp = require('gulp');
 const elixir = require('laravel-elixir');
 
@@ -9,24 +11,12 @@ const del = require('del');
   GULP cmd
  */
 
-gulp.task('clearpublic', () => {
-  return del.sync(['public_html/**/*']);
-});
-
-gulp.task('cpypublic', () => {
-  return copydir.sync('old_public/', 'public_html/');
-});
-
-gulp.task('cpybootstrap', () => {
-  return fs.renameSync('out_dist/index.html', 'resources/views/bootstrap.blade.php');
-});
-
-gulp.task('cpydist', () => {
-  return copydir.sync('out_dist/', 'public_html/');
-});
-
-gulp.task('cleardist', () => {
-  return del.sync(['out_dist/**/*']);
+gulp.task('cpybuild', () => {
+  del.sync(['public_html/**/*']);
+  copydir.sync('old_public/', 'public_html/');
+  fs.renameSync('out_dist/index.html', 'resources/views/bootstrap.blade.php');
+  copydir.sync('out_dist/', 'public_html/');
+  del.sync(['out_dist/**/*']);
 });
 
 /*
